@@ -4,12 +4,13 @@ public class GameBoard {
     Input input = new Input();
 
     char[][] createInitialGameBoard() {
-        System.out.println("Provide symbol to fill game board:");
-        char symbol = input.takeSymbolToFillGameBoard();
+        String fillingInitialCells = input.inputInitialCells();
+        int counter = 0;
         char[][] gameBoard = new char[3][3];
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[i].length; j++) {
-                gameBoard[i][j] = symbol;
+                gameBoard[i][j] = fillingInitialCells.charAt(counter);
+                counter++;
             }
         }
         return gameBoard;
