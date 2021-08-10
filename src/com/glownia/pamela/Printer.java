@@ -1,10 +1,9 @@
 package com.glownia.pamela;
 
 public class Printer {
+    GameBoard gameBoard = new GameBoard();
 
-    void printInitialGameBoard() {
-        GameBoard gameBoard = new GameBoard();
-        char[][] initialGameBoard = gameBoard.createInitialGameBoard();
+    void printGameBoard(char[][] initialGameBoard) {
         System.out.println("---------");
         for (int i = 0; i < initialGameBoard.length; i++) {
             System.out.print("| ");
@@ -18,5 +17,16 @@ public class Printer {
             System.out.println();
         }
         System.out.println("---------");
+    }
+
+    void printMovesForPlayerX() {
+        gameBoard.movePlayer('X');
+    }
+
+    void printGame() {
+        char[][] initialGameBoard = gameBoard.createInitialGameBoard();
+        printGameBoard(initialGameBoard);
+        printMovesForPlayerX();
+        printGameBoard(initialGameBoard);
     }
 }
