@@ -19,14 +19,21 @@ public class Printer {
         System.out.println("---------");
     }
 
-    void printMovesForPlayerX() {
-        gameBoard.movePlayer('X');
-    }
-
     void printGame() {
-        char[][] initialGameBoard = gameBoard.createInitialGameBoard();
-        printGameBoard(initialGameBoard);
-        printMovesForPlayerX();
-        printGameBoard(initialGameBoard);
+        char turn = '_';
+        char[][] currentGameBoard = gameBoard.createInitialGameBoard();
+        int emptyCells = gameBoard.countEmptyCells();
+        Player playerX = new Player('X');
+        Player playerO = new Player('O');
+        do {
+            printGameBoard(currentGameBoard);
+            if (turn == 'X') {
+                turn = gameBoard.move(playerO);
+            } else {
+                turn = gameBoard.move(playerX);
+            }
+            emptyCells--;
+        } while (emptyCells > 0);
+        System.out.println("End");
     }
 }

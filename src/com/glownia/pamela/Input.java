@@ -8,6 +8,7 @@ public class Input {
     String inputInitialCells() {
         System.out.print("Enter the cells (input 9 symbols: X, O or _ for empty cell): ");
         String fillingInitialCells = scan.next();
+        scan.nextLine();
         for (int i = 0; i < fillingInitialCells.length(); i++) {
             if (!(fillingInitialCells.substring(i, i + 1).equalsIgnoreCase("X") || fillingInitialCells.substring(i, i + 1).equalsIgnoreCase("O") || fillingInitialCells.substring(i, i + 1).equalsIgnoreCase("_"))) {
                 while (!(fillingInitialCells.substring(i, i + 1).equalsIgnoreCase("x") || fillingInitialCells.substring(i, i + 1).equalsIgnoreCase("o") || fillingInitialCells.substring(i, i + 1).equalsIgnoreCase("_"))) {
@@ -21,7 +22,6 @@ public class Input {
 
     int[] inputCoordinates() {
         System.out.print("Enter the coordinates separate with space (numbers from 1 to 3): ");
-        scan.nextLine();
         String userInput = scan.nextLine();
         while (!(userInput.substring(0, 1).matches("[0-9]+") || userInput.substring(2, 3).matches("[0-9]+"))) {
             System.out.println("You should enter numbers!");

@@ -25,8 +25,10 @@ public class GameBoard {
         int i = coordinates[0];
         int j = coordinates[1];
         while (!(checkIfCellIsEmpty(i, j))) {
-            System.out.println("This cell is occupied!");
+            System.out.println("This cell is occupied! Choose another one!");
             coordinates = input.inputCoordinates();
+            i = coordinates[0];
+            j = coordinates[1];
         }
 
         return coordinates;
@@ -36,11 +38,23 @@ public class GameBoard {
         return gameBoard[i - 1][j - 1] == '_' || gameBoard[i - 1][j - 1] == ' ';
     }
 
-    char movePlayer(char player) {
+    int countEmptyCells() {
+        int emptyCells = 0;
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[i].length; j++) {
+                if (gameBoard[i][j] == '_' || gameBoard[i][j] == ' ') {
+                    emptyCells += 1;
+                }
+            }
+        }
+        return emptyCells;
+    }
+
+    char move(Player player) {
         int[] correctCoordinates = takeCoordinates();
         int i = correctCoordinates[0] - 1;
         int j = correctCoordinates[1] - 1;
-        gameBoard[i][j] = Character.toUpperCase(player);
+        gameBoard[i][j] = Character.toUpperCase(player.getName());
         return gameBoard[i][j];
     }
 }
