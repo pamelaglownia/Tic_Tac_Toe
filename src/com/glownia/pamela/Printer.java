@@ -25,15 +25,28 @@ public class Printer {
         int emptyCells = gameBoard.countEmptyCells();
         Player playerX = new Player('X');
         Player playerO = new Player('O');
-        do {
+        while (emptyCells > 0) {
             printGameBoard(currentGameBoard);
             if (turn == 'X') {
                 turn = gameBoard.move(playerO);
+                if (gameBoard.isWinner(playerO)) {
+                    break;
+                }
             } else {
                 turn = gameBoard.move(playerX);
+                if (gameBoard.isWinner(playerX)) {
+                    break;
+                }
             }
             emptyCells--;
-        } while (emptyCells > 0);
-        System.out.println("End");
+        }
+        printGameBoard(currentGameBoard);
+        if (gameBoard.isWinner(playerX)) {
+            System.out.println(playerX.getName() + " wins");
+        } else if (gameBoard.isWinner(playerO)) {
+            System.out.println(playerO.getName() + " wins");
+        } else {
+            System.out.println("Draw");
+        }
     }
 }
