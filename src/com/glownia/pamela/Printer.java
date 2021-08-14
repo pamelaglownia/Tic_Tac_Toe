@@ -21,7 +21,7 @@ public class Printer {
 
     void printGame() {
         char turn = '_';
-        char[][] currentGameBoard = gameBoard.createInitialGameBoard();
+        char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
         int emptyCells = gameBoard.countEmptyCells();
         Player playerX = new Player('X');
         Player playerO = new Player('O');

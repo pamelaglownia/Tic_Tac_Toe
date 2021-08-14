@@ -8,13 +8,10 @@ public class GameBoard {
         this.gameBoard = new char[3][3];
     }
 
-    char[][] createInitialGameBoard() {
-        String fillingInitialCells = input.inputInitialCells();
-        int counter = 0;
+    char[][] createEmptyGameBoard() {
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[i].length; j++) {
-                gameBoard[i][j] = fillingInitialCells.charAt(counter);
-                counter++;
+                gameBoard[i][j] = ' ';
             }
         }
         return gameBoard;
@@ -30,7 +27,6 @@ public class GameBoard {
             i = coordinates[0];
             j = coordinates[1];
         }
-
         return coordinates;
     }
 
