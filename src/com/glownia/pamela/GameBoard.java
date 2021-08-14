@@ -1,5 +1,7 @@
 package com.glownia.pamela;
 
+import java.util.Random;
+
 public class GameBoard {
     Input input = new Input();
     char[][] gameBoard;
@@ -21,7 +23,7 @@ public class GameBoard {
         int[] coordinates = input.inputCoordinates();
         int i = coordinates[0];
         int j = coordinates[1];
-        while (!(checkIfCellIsEmpty(i, j))) {
+        while (!(isEmptyCell(i, j))) {
             System.out.println("This cell is occupied! Choose another one!");
             coordinates = input.inputCoordinates();
             i = coordinates[0];
@@ -30,7 +32,19 @@ public class GameBoard {
         return coordinates;
     }
 
-    boolean checkIfCellIsEmpty(int i, int j) {
+    int[] takeRandomCoordinatesForComputerPlayer() {
+        int[] coordinates = new int[2];
+        Random random = new Random();
+        coordinates[0] = random.nextInt(3) + 1;
+        coordinates[1] = random.nextInt(3) + 1;
+        while (!(isEmptyCell(coordinates[0], coordinates[1]))) {
+            coordinates[0] = random.nextInt(3) + 1;
+            coordinates[1] = random.nextInt(3) + 1;
+        }
+        return coordinates;
+    }
+
+    boolean isEmptyCell(int i, int j) {
         return gameBoard[i - 1][j - 1] == '_' || gameBoard[i - 1][j - 1] == ' ';
     }
 
@@ -46,11 +60,19 @@ public class GameBoard {
         return emptyCells;
     }
 
-    char move(Player player) {
+    char movePlayer(Player player) {
         int[] correctCoordinates = takeCoordinates();
         int i = correctCoordinates[0] - 1;
         int j = correctCoordinates[1] - 1;
         gameBoard[i][j] = Character.toUpperCase(player.getName());
+        return gameBoard[i][j];
+    }
+
+    char moveComputer(Player computerPlayer) {
+        int[] correctCoordinates = takeRandomCoordinatesForComputerPlayer();
+        int i = correctCoordinates[0] - 1;
+        int j = correctCoordinates[1] - 1;
+        gameBoard[i][j] = Character.toUpperCase(computerPlayer.getName());
         return gameBoard[i][j];
     }
 

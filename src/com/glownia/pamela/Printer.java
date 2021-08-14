@@ -8,9 +8,6 @@ public class Printer {
         for (int i = 0; i < initialGameBoard.length; i++) {
             System.out.print("| ");
             for (int j = 0; j < initialGameBoard[i].length; j++) {
-                if (initialGameBoard[i][j] == '_') {
-                    initialGameBoard[i][j] = ' ';
-                }
                 System.out.print(initialGameBoard[i][j] + " ");
             }
             System.out.print("|");
@@ -24,16 +21,17 @@ public class Printer {
         char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
         int emptyCells = gameBoard.countEmptyCells();
         Player playerX = new Player('X');
-        Player playerO = new Player('O');
+        Player computerPlayer = new Player('O');
         while (emptyCells > 0) {
             printGameBoard(currentGameBoard);
             if (turn == 'X') {
-                turn = gameBoard.move(playerO);
-                if (gameBoard.isWinner(playerO)) {
+                System.out.println("Making move level \"easy\"");
+                turn = gameBoard.moveComputer(computerPlayer);
+                if (gameBoard.isWinner(computerPlayer)) {
                     break;
                 }
             } else {
-                turn = gameBoard.move(playerX);
+                turn = gameBoard.movePlayer(playerX);
                 if (gameBoard.isWinner(playerX)) {
                     break;
                 }
@@ -43,8 +41,8 @@ public class Printer {
         printGameBoard(currentGameBoard);
         if (gameBoard.isWinner(playerX)) {
             System.out.println(playerX.getName() + " wins");
-        } else if (gameBoard.isWinner(playerO)) {
-            System.out.println(playerO.getName() + " wins");
+        } else if (gameBoard.isWinner(computerPlayer)) {
+            System.out.println(computerPlayer.getName() + " wins");
         } else {
             System.out.println("Draw");
         }
