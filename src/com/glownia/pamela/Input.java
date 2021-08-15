@@ -28,6 +28,17 @@ public class Input {
         return setOfUserChoice;
     }
 
+    char chooseCharacterToPlay() {
+        System.out.print("Choose character [X or O]: ");
+        char character = scan.next().charAt(0);
+        character = Character.toUpperCase(character);
+        while (!(character == 'X' || character == 'O')) {
+            System.out.print("Wrong input. Choose character [X or O]: ");
+            character = scan.next().charAt(0);
+        }
+        return character;
+    }
+
     int[] inputCoordinates() {
         System.out.print("Enter the coordinates separate with space (numbers from 1 to 3): ");
         String userInput = scan.nextLine();

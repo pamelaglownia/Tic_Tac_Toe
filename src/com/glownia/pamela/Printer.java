@@ -39,19 +39,42 @@ public class Printer {
                 break;
             case 1:
                 System.out.println("You will play with user.");
+                printGameBetweenTwoUsers();
                 break;
             case 2:
                 System.out.println("You will play with computer.");
                 break;
+            case 3:
+                System.out.println("You will watch game between two computers.");
+                break;
         }
+    }
+
+    void setBothUsersNames(Player firstPlayer, Player secondPlayer) {
+        gameBoard.setPlayerName(firstPlayer);
+        System.out.printf("First user: %s\n", firstPlayer.getName());
+        if (firstPlayer.getName() == 'X') {
+            secondPlayer.setName('O');
+        } else {
+            secondPlayer.setName('X');
+        }
+        System.out.printf("Second user: %s\n", secondPlayer.getName());
+    }
+
+    void printGameBetweenTwoUsers() {
+        Player firstPlayer = new Player();
+        Player secondPlayer = new Player();
+        setBothUsersNames(firstPlayer, secondPlayer);
     }
 
     void printGameWihComputer() {
         char turn = '_';
         char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
         int emptyCells = gameBoard.countEmptyCells();
-        Player playerX = new Player('X');
-        Player computerPlayer = new Player('O');
+        Player playerX = new Player();
+        playerX.setName('X');
+        Player computerPlayer = new Player();
+        computerPlayer.setName('O');
         while (emptyCells > 0) {
             printGameBoard(currentGameBoard);
             if (turn == 'X') {

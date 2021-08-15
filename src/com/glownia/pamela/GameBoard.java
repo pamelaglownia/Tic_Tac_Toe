@@ -29,9 +29,16 @@ public class GameBoard {
                 } else {
                     userDecision = 2;
                 }
+            } else if (setOfUserChoice[1].equalsIgnoreCase(MenuOption.EASY.name()) && setOfUserChoice[2].equalsIgnoreCase(MenuOption.EASY.name())) {
+                userDecision = 3;
             }
         }
         return userDecision;
+    }
+
+    void setPlayerName(Player player) {
+        char name = input.chooseCharacterToPlay();
+        player.setName(name);
     }
 
     int[] takeCoordinates() {
