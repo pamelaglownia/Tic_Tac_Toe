@@ -19,6 +19,21 @@ public class GameBoard {
         return gameBoard;
     }
 
+    int chooseGameOption() {
+        int userDecision = 0;
+        String[] setOfUserChoice = input.inputCommand();
+        if (setOfUserChoice[0].equalsIgnoreCase(MenuOption.START.name())) {
+            if (setOfUserChoice[1].equalsIgnoreCase(MenuOption.USER.name())) {
+                if (setOfUserChoice[2].equalsIgnoreCase(MenuOption.USER.name())) {
+                    userDecision = 1;
+                } else {
+                    userDecision = 2;
+                }
+            }
+        }
+        return userDecision;
+    }
+
     int[] takeCoordinates() {
         int[] coordinates = input.inputCoordinates();
         int i = coordinates[0];

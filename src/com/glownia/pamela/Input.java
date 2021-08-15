@@ -5,6 +5,29 @@ import java.util.Scanner;
 public class Input {
     Scanner scan = new Scanner(System.in);
 
+    String[] inputCommand() {
+        System.out.print("Input command: ");
+        String userChoice = scan.nextLine();
+        String[] setOfUserChoice = userChoice.split(" ");
+        if (setOfUserChoice[0].equalsIgnoreCase((MenuOption.EXIT.name()))) {
+            setOfUserChoice = new String[1];
+            setOfUserChoice[0] = MenuOption.EXIT.name();
+            return setOfUserChoice;
+        } else if (setOfUserChoice.length != 3) {
+            System.out.println("Bad parameters!");
+            setOfUserChoice = inputCommand();
+        } else {
+            for (String userOption : setOfUserChoice) {
+                if (MenuOption.equals(userOption) == null) {
+                    System.out.println("Bad parameters!");
+                    setOfUserChoice = inputCommand();
+                    break;
+                }
+            }
+        }
+        return setOfUserChoice;
+    }
+
     int[] inputCoordinates() {
         System.out.print("Enter the coordinates separate with space (numbers from 1 to 3): ");
         String userInput = scan.nextLine();
