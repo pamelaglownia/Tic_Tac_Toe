@@ -36,6 +36,7 @@ public class Input {
             System.out.print("Wrong input. Choose character [X or O]: ");
             character = scan.next().charAt(0);
         }
+        scan.nextLine();
         return character;
     }
 

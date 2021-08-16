@@ -1,6 +1,8 @@
 package com.glownia.pamela;
 
 
+import java.util.Arrays;
+
 public class Printer {
     GameBoard gameBoard = new GameBoard();
 
@@ -38,14 +40,16 @@ public class Printer {
                 System.out.println("Bye!");
                 break;
             case 1:
-                System.out.println("You will play with user.");
+                System.out.println("Let's play with other user!");
                 printGameBetweenTwoUsers();
                 break;
             case 2:
-                System.out.println("You will play with computer.");
+                System.out.println("Let's play with computer!");
+                printGameWihComputer();
                 break;
             case 3:
-                System.out.println("You will watch game between two computers.");
+                System.out.println("Let's watch game between two computers!");
+                printGameBetweenTwoComputers();
                 break;
         }
     }
@@ -65,7 +69,28 @@ public class Printer {
         Player firstPlayer = new Player();
         Player secondPlayer = new Player();
         setBothUsersNames(firstPlayer, secondPlayer);
+        char turn = '_';
+        char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
+        int emptyCells = gameBoard.countEmptyCells();
+        while (emptyCells > 0) {
+            printGameBoard(currentGameBoard);
+            if (turn == firstPlayer.getName()) {
+                turn = gameBoard.movePlayer(secondPlayer);
+                if (gameBoard.isWinner(secondPlayer)) {
+                    break;
+                }
+            } else {
+                turn = gameBoard.movePlayer(firstPlayer);
+                if (gameBoard.isWinner(firstPlayer)) {
+                    break;
+                }
+            }
+            emptyCells--;
+        }
+        printGameBoard(currentGameBoard);
+        printWinner(firstPlayer, secondPlayer);
     }
+
 
     void printGameWihComputer() {
         char turn = '_';
@@ -92,10 +117,43 @@ public class Printer {
             emptyCells--;
         }
         printGameBoard(currentGameBoard);
-        if (gameBoard.isWinner(playerX)) {
-            System.out.println(playerX.getName() + " wins");
-        } else if (gameBoard.isWinner(computerPlayer)) {
-            System.out.println(computerPlayer.getName() + " wins");
+        printWinner(playerX, computerPlayer);
+    }
+
+    void printGameBetweenTwoComputers() {
+        char turn = '_';
+        char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
+        int emptyCells = gameBoard.countEmptyCells();
+        Player firstComputer = new Player();
+        firstComputer.setName('X');
+        Player secondComputer = new Player();
+        secondComputer.setName('O');
+        while (emptyCells > 0) {
+            printGameBoard(currentGameBoard);
+            if (turn == 'X') {
+                System.out.println("Second computer is making move level \"easy\"");
+                turn = gameBoard.moveComputer(secondComputer);
+                if (gameBoard.isWinner(secondComputer)) {
+                    break;
+                }
+            } else {
+                System.out.println("First computer is making move level \"easy\"");
+                turn = gameBoard.moveComputer(firstComputer);
+                if (gameBoard.isWinner(firstComputer)) {
+                    break;
+                }
+            }
+            emptyCells--;
+        }
+        printGameBoard(currentGameBoard);
+        printWinner(firstComputer, secondComputer);
+    }
+
+    void printWinner(Player firstPlayer, Player secondPlayer) {
+        if (gameBoard.isWinner(firstPlayer)) {
+            System.out.println(firstPlayer.getName() + " wins");
+        } else if (gameBoard.isWinner(secondPlayer)) {
+            System.out.println(secondPlayer.getName() + " wins");
         } else {
             System.out.println("Draw");
         }
