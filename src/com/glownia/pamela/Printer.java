@@ -1,8 +1,5 @@
 package com.glownia.pamela;
 
-
-import java.util.Arrays;
-
 public class Printer {
     GameBoard gameBoard = new GameBoard();
 
@@ -55,7 +52,7 @@ public class Printer {
     }
 
     void setBothUsersNames(Player firstPlayer, Player secondPlayer) {
-        gameBoard.setPlayerName(firstPlayer);
+        firstPlayer.setPlayerName();
         System.out.printf("First user: %s\n", firstPlayer.getName());
         if (firstPlayer.getName() == 'X') {
             secondPlayer.setName('O');
@@ -75,22 +72,21 @@ public class Printer {
         while (emptyCells > 0) {
             printGameBoard(currentGameBoard);
             if (turn == firstPlayer.getName()) {
-                turn = gameBoard.movePlayer(secondPlayer);
-                if (gameBoard.isWinner(secondPlayer)) {
+                turn = secondPlayer.move(gameBoard, currentGameBoard);
+                if (secondPlayer.isWinner(currentGameBoard)) {
                     break;
                 }
             } else {
-                turn = gameBoard.movePlayer(firstPlayer);
-                if (gameBoard.isWinner(firstPlayer)) {
+                turn = firstPlayer.move(gameBoard, currentGameBoard);
+                if (firstPlayer.isWinner(currentGameBoard)) {
                     break;
                 }
             }
             emptyCells--;
         }
         printGameBoard(currentGameBoard);
-        printWinner(firstPlayer, secondPlayer);
+        printWinner(firstPlayer, secondPlayer, currentGameBoard);
     }
-
 
     void printGameWihComputer() {
         char turn = '_';
@@ -98,62 +94,79 @@ public class Printer {
         int emptyCells = gameBoard.countEmptyCells();
         Player playerX = new Player();
         playerX.setName('X');
-        Player computerPlayer = new Player();
-        computerPlayer.setName('O');
+        Computer computerPlayer = new Computer('O');
         while (emptyCells > 0) {
             printGameBoard(currentGameBoard);
             if (turn == 'X') {
                 System.out.println("Making move level \"easy\"");
-                turn = gameBoard.moveComputer(computerPlayer);
-                if (gameBoard.isWinner(computerPlayer)) {
+                turn = computerPlayer.move(currentGameBoard, gameBoard);
+                if (computerPlayer.isWinner(currentGameBoard)) {
                     break;
                 }
             } else {
-                turn = gameBoard.movePlayer(playerX);
-                if (gameBoard.isWinner(playerX)) {
+                turn = playerX.move(gameBoard, currentGameBoard);
+                if (playerX.isWinner(currentGameBoard)) {
                     break;
                 }
             }
             emptyCells--;
         }
         printGameBoard(currentGameBoard);
-        printWinner(playerX, computerPlayer);
+        printWinner(playerX, computerPlayer, currentGameBoard);
     }
 
     void printGameBetweenTwoComputers() {
         char turn = '_';
         char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
         int emptyCells = gameBoard.countEmptyCells();
-        Player firstComputer = new Player();
-        firstComputer.setName('X');
-        Player secondComputer = new Player();
-        secondComputer.setName('O');
+        Computer firstComputer = new Computer('X');
+        Computer secondComputer = new Computer('O');
         while (emptyCells > 0) {
             printGameBoard(currentGameBoard);
             if (turn == 'X') {
                 System.out.println("Second computer is making move level \"easy\"");
-                turn = gameBoard.moveComputer(secondComputer);
-                if (gameBoard.isWinner(secondComputer)) {
+                turn = secondComputer.move(currentGameBoard, gameBoard);
+                if (secondComputer.isWinner(currentGameBoard)) {
                     break;
                 }
             } else {
                 System.out.println("First computer is making move level \"easy\"");
-                turn = gameBoard.moveComputer(firstComputer);
-                if (gameBoard.isWinner(firstComputer)) {
+                turn = firstComputer.move(currentGameBoard, gameBoard);
+                if (firstComputer.isWinner(currentGameBoard)) {
                     break;
                 }
             }
             emptyCells--;
         }
         printGameBoard(currentGameBoard);
-        printWinner(firstComputer, secondComputer);
+        printWinner(firstComputer, secondComputer, currentGameBoard);
     }
 
-    void printWinner(Player firstPlayer, Player secondPlayer) {
-        if (gameBoard.isWinner(firstPlayer)) {
+    void printWinner(Player firstPlayer, Player secondPlayer, char[][] currentGameBoard) {
+        if (firstPlayer.isWinner(currentGameBoard)) {
             System.out.println(firstPlayer.getName() + " wins");
-        } else if (gameBoard.isWinner(secondPlayer)) {
+        } else if (secondPlayer.isWinner(currentGameBoard)) {
             System.out.println(secondPlayer.getName() + " wins");
+        } else {
+            System.out.println("Draw");
+        }
+    }
+
+    void printWinner(Player firstPlayer, Computer computer, char[][] currentGameBoard) {
+        if (firstPlayer.isWinner(currentGameBoard)) {
+            System.out.println(firstPlayer.getName() + " wins");
+        } else if (computer.isWinner(currentGameBoard)) {
+            System.out.println(computer.getName() + " wins");
+        } else {
+            System.out.println("Draw");
+        }
+    }
+
+    void printWinner(Computer firstComputer, Computer secondComputer, char[][] currentGameBoard) {
+        if (firstComputer.isWinner(currentGameBoard)) {
+            System.out.println(firstComputer.getName() + " wins");
+        } else if (secondComputer.isWinner(currentGameBoard)) {
+            System.out.println(secondComputer.getName() + " wins");
         } else {
             System.out.println("Draw");
         }

@@ -1,7 +1,5 @@
 package com.glownia.pamela;
 
-import java.util.Random;
-
 public class GameBoard {
     Input input = new Input();
     char[][] gameBoard;
@@ -36,11 +34,6 @@ public class GameBoard {
         return userDecision;
     }
 
-    void setPlayerName(Player player) {
-        char name = input.chooseCharacterToPlay();
-        player.setName(name);
-    }
-
     int[] takeCoordinates() {
         int[] coordinates = input.inputCoordinates();
         int i = coordinates[0];
@@ -50,18 +43,6 @@ public class GameBoard {
             coordinates = input.inputCoordinates();
             i = coordinates[0];
             j = coordinates[1];
-        }
-        return coordinates;
-    }
-
-    int[] takeRandomCoordinatesForComputerPlayer() {
-        int[] coordinates = new int[2];
-        Random random = new Random();
-        coordinates[0] = random.nextInt(3) + 1;
-        coordinates[1] = random.nextInt(3) + 1;
-        while (!(isEmptyCell(coordinates[0], coordinates[1]))) {
-            coordinates[0] = random.nextInt(3) + 1;
-            coordinates[1] = random.nextInt(3) + 1;
         }
         return coordinates;
     }
@@ -80,96 +61,5 @@ public class GameBoard {
             }
         }
         return emptyCells;
-    }
-
-    char movePlayer(Player player) {
-        int[] correctCoordinates = takeCoordinates();
-        int i = correctCoordinates[0] - 1;
-        int j = correctCoordinates[1] - 1;
-        gameBoard[i][j] = Character.toUpperCase(player.getName());
-        return gameBoard[i][j];
-    }
-
-    char moveComputer(Player computerPlayer) {
-        int[] correctCoordinates = takeRandomCoordinatesForComputerPlayer();
-        int i = correctCoordinates[0] - 1;
-        int j = correctCoordinates[1] - 1;
-        gameBoard[i][j] = Character.toUpperCase(computerPlayer.getName());
-        return gameBoard[i][j];
-    }
-
-    boolean isWinner(Player player) {
-        //columns
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][0] == player.getName())) {
-                break;
-            }
-            if (i == gameBoard.length - 1) {
-                return true;
-            }
-        }
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][1] == player.getName())) {
-                break;
-            }
-            if (i == gameBoard.length - 1) {
-                return true;
-            }
-        }
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][2] == player.getName())) {
-                break;
-            }
-            if (i == gameBoard.length - 1) {
-                return true;
-            }
-        }
-
-        //rows
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[0][i] == player.getName())) {
-                break;
-            }
-            if (i == gameBoard.length - 1) {
-                return true;
-            }
-        }
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[1][i] == player.getName())) {
-                break;
-            }
-            if (i == gameBoard.length - 1) {
-                return true;
-            }
-        }
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[2][i] == player.getName())) {
-                break;
-            }
-            if (i == gameBoard.length - 1) {
-                return true;
-            }
-        }
-
-        //diagonal
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][i] == player.getName())) {
-                break;
-            }
-            if (i == gameBoard.length - 1) {
-                return true;
-            }
-        }
-
-        //anti-diagonal
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][gameBoard.length - 1 - i] == player.getName())) {
-                break;
-            }
-            if (i == gameBoard.length - 1) {
-                return true;
-            }
-        }
-        return false;
     }
 }
