@@ -43,9 +43,9 @@ public class Input {
     int[] inputCoordinates() {
         System.out.print("Enter the coordinates separate with space (numbers from 1 to 3). Example: to choose coordinates [1,1] type: \"1 1\": ");
         String userInput = scan.nextLine();
-        while (!(userInput.substring(0, 1).matches("[0-9]+") || userInput.substring(2, 3).matches("[0-9]+"))) {
-            System.out.println("You should enter numbers!");
-            System.out.print("Enter the coordinates:");
+        while (userInput.length() != 3 || (!(userInput.substring(0, 1).matches("[0-9]+") || userInput.substring(2, 3).matches("[0-9]+")))) {
+            System.out.println("You should enter numbers separate with space!");
+            System.out.print("Enter the coordinates: ");
             userInput = scan.nextLine();
         }
         int i = Integer.parseInt(userInput.substring(0, 1));
