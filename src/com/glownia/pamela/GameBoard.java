@@ -24,11 +24,14 @@ public class GameBoard {
             if (setOfUserChoice[1].equalsIgnoreCase(MenuOption.USER.name())) {
                 if (setOfUserChoice[2].equalsIgnoreCase(MenuOption.USER.name())) {
                     userDecision = 1;
-                } else {
+                } else if (setOfUserChoice[2].equalsIgnoreCase(MenuOption.EASY.name())) {
                     userDecision = 2;
+                } else {
+                    userDecision = 3;
+
                 }
             } else if (setOfUserChoice[1].equalsIgnoreCase(MenuOption.EASY.name()) && setOfUserChoice[2].equalsIgnoreCase(MenuOption.EASY.name())) {
-                userDecision = 3;
+                userDecision = 4;
             }
         }
         return userDecision;

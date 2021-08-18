@@ -29,83 +29,121 @@ public class Computer {
         return coordinates;
     }
 
-    char move(char[][] array, GameBoard gameBoard) {
+    char easyMove(char[][] currentGameBoard, GameBoard gameBoard) {
         int[] correctCoordinates = takeRandomCoordinatesForComputerPlayer(gameBoard);
         int i = correctCoordinates[0] - 1;
         int j = correctCoordinates[1] - 1;
-        array[i][j] = Character.toUpperCase(getName());
-        return array[i][j];
+        currentGameBoard[i][j] = Character.toUpperCase(getName());
+        return currentGameBoard[i][j];
     }
 
-    boolean isWinner(char[][] gameBoard) {
+    char mediumMove(char[][] currentGameBoard, GameBoard gameBoard) {
+        //set temporary name
+        int bestI = 0;
+        int bestJ = 0;
+        int emptyCells = gameBoard.countEmptyCells();
+        if (getName() == 'X') {
+            setName('O');
+        } else {
+            setName('X');
+        }
+        for (int i = 0; i < currentGameBoard.length; i++) {
+            for (int j = 0; j < currentGameBoard[i].length; j++) {
+                if (currentGameBoard[i][j] == ' ') {
+                    currentGameBoard[i][j] = getName();
+                    if (emptyCells >= 8 || isWinner(currentGameBoard)) {
+                        bestI = i;
+                        bestJ = j;
+                    }
+
+                    currentGameBoard[i][j] = ' ';
+                }
+            }
+        }
+
+        //restore proper name
+        if (getName() == 'X') {
+            setName('O');
+        } else {
+            setName('X');
+        }
+        if (currentGameBoard[bestI][bestJ] == ' ') {
+            currentGameBoard[bestI][bestJ] = Character.toUpperCase(getName());
+        } else {
+            easyMove(currentGameBoard, gameBoard);
+        }
+        return currentGameBoard[bestI][bestJ];
+    }
+
+    boolean isWinner(char[][] currentGameBoard) {
         //columns
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][0] == getName())) {
+        for (int i = 0; i < currentGameBoard.length; i++) {
+            if (!(currentGameBoard[i][0] == getName())) {
                 break;
             }
-            if (i == gameBoard.length - 1) {
+            if (i == currentGameBoard.length - 1) {
                 return true;
             }
         }
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][1] == getName())) {
+        for (int i = 0; i < currentGameBoard.length; i++) {
+            if (!(currentGameBoard[i][1] == getName())) {
                 break;
             }
-            if (i == gameBoard.length - 1) {
+            if (i == currentGameBoard.length - 1) {
                 return true;
             }
         }
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][2] == getName())) {
+        for (int i = 0; i < currentGameBoard.length; i++) {
+            if (!(currentGameBoard[i][2] == getName())) {
                 break;
             }
-            if (i == gameBoard.length - 1) {
+            if (i == currentGameBoard.length - 1) {
                 return true;
             }
         }
 
         //rows
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[0][i] == getName())) {
+        for (int i = 0; i < currentGameBoard.length; i++) {
+            if (!(currentGameBoard[0][i] == getName())) {
                 break;
             }
-            if (i == gameBoard.length - 1) {
+            if (i == currentGameBoard.length - 1) {
                 return true;
             }
         }
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[1][i] == getName())) {
+        for (int i = 0; i < currentGameBoard.length; i++) {
+            if (!(currentGameBoard[1][i] == getName())) {
                 break;
             }
-            if (i == gameBoard.length - 1) {
+            if (i == currentGameBoard.length - 1) {
                 return true;
             }
         }
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[2][i] == getName())) {
+        for (int i = 0; i < currentGameBoard.length; i++) {
+            if (!(currentGameBoard[2][i] == getName())) {
                 break;
             }
-            if (i == gameBoard.length - 1) {
+            if (i == currentGameBoard.length - 1) {
                 return true;
             }
         }
 
         //diagonal
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][i] == getName())) {
+        for (int i = 0; i < currentGameBoard.length; i++) {
+            if (!(currentGameBoard[i][i] == getName())) {
                 break;
             }
-            if (i == gameBoard.length - 1) {
+            if (i == currentGameBoard.length - 1) {
                 return true;
             }
         }
 
         //anti-diagonal
-        for (int i = 0; i < gameBoard.length; i++) {
-            if (!(gameBoard[i][gameBoard.length - 1 - i] == getName())) {
+        for (int i = 0; i < currentGameBoard.length; i++) {
+            if (!(currentGameBoard[i][currentGameBoard.length - 1 - i] == getName())) {
                 break;
             }
-            if (i == gameBoard.length - 1) {
+            if (i == currentGameBoard.length - 1) {
                 return true;
             }
         }

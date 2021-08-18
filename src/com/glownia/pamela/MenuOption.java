@@ -1,7 +1,7 @@
 package com.glownia.pamela;
 
 public enum MenuOption {
-    START, EXIT, USER, EASY;
+    START, EXIT, USER, EASY, MEDIUM;
 
     static MenuOption equals(String userChoice) {
         for (MenuOption option : MenuOption.values()) {

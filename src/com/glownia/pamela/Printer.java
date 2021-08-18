@@ -9,9 +9,10 @@ public class Printer {
         builder.append("We have few options for you:\n");
         builder.append("- \"start\" game with other \"user\",\n");
         builder.append("- \"start\" game with computer (\"easy\" level),\n");
+        builder.append("- \"start\" game with computer (\"medium\" level),\n");
         builder.append("- \"exit\" game.\n");
         builder.append("Choose one from options above. To start the game type three parameters or type exit to end the game.\n");
-        builder.append("(Example: to start with another user type: \"start user user\" and to start with computer type: \"start user easy)\"\n");
+        builder.append("(Explanation: to start with another user type: \"start user user\" and to start with computer on easy level type: \"start user easy)\" or on the medium level: \"start user medium)\"\n");
         builder.append("Good luck!\n");
         System.out.println(builder);
     }
@@ -41,10 +42,14 @@ public class Printer {
                 printGameBetweenTwoUsers();
                 break;
             case 2:
-                System.out.println("Let's play with computer!");
-                printGameWihComputer();
+                System.out.println("Let's play with computer (easy level)!");
+                printGameWihComputer(MenuOption.EASY);
                 break;
             case 3:
+                System.out.println("Let's play with computer (medium level)!");
+                printGameWihComputer(MenuOption.MEDIUM);
+                break;
+            case 4:
                 System.out.println("Let's watch game between two computers!");
                 printGameBetweenTwoComputers();
                 break;
@@ -88,7 +93,7 @@ public class Printer {
         printWinner(firstPlayer, secondPlayer, currentGameBoard);
     }
 
-    void printGameWihComputer() {
+    void printGameWihComputer(MenuOption computerLevel) {
         char turn = '_';
         char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
         int emptyCells = gameBoard.countEmptyCells();
@@ -98,8 +103,13 @@ public class Printer {
         while (emptyCells > 0) {
             printGameBoard(currentGameBoard);
             if (turn == 'X') {
-                System.out.println("Making move level \"easy\"");
-                turn = computerPlayer.move(currentGameBoard, gameBoard);
+                if (computerLevel == MenuOption.EASY) {
+                    System.out.println("Making move level \"easy\"");
+                    turn = computerPlayer.easyMove(currentGameBoard, gameBoard);
+                } else {
+                    System.out.println("Making move level \"medium\"");
+                    turn = computerPlayer.mediumMove(currentGameBoard, gameBoard);
+                }
                 if (computerPlayer.isWinner(currentGameBoard)) {
                     break;
                 }
@@ -125,13 +135,13 @@ public class Printer {
             printGameBoard(currentGameBoard);
             if (turn == 'X') {
                 System.out.println("Second computer is making move level \"easy\"");
-                turn = secondComputer.move(currentGameBoard, gameBoard);
+                turn = secondComputer.easyMove(currentGameBoard, gameBoard);
                 if (secondComputer.isWinner(currentGameBoard)) {
                     break;
                 }
             } else {
                 System.out.println("First computer is making move level \"easy\"");
-                turn = firstComputer.move(currentGameBoard, gameBoard);
+                turn = firstComputer.easyMove(currentGameBoard, gameBoard);
                 if (firstComputer.isWinner(currentGameBoard)) {
                     break;
                 }

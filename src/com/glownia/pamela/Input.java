@@ -6,7 +6,7 @@ public class Input {
     Scanner scan = new Scanner(System.in);
 
     String[] inputCommand() {
-        System.out.print("Input command: ");
+        System.out.print("Input command separate with space: ");
         String userChoice = scan.nextLine();
         String[] setOfUserChoice = userChoice.split(" ");
         if (setOfUserChoice[0].equalsIgnoreCase((MenuOption.EXIT.name()))) {
@@ -41,7 +41,7 @@ public class Input {
     }
 
     int[] inputCoordinates() {
-        System.out.print("Enter the coordinates separate with space (numbers from 1 to 3): ");
+        System.out.print("Enter the coordinates separate with space (numbers from 1 to 3). Example: to choose coordinates [1,1] type: \"1 1\": ");
         String userInput = scan.nextLine();
         while (!(userInput.substring(0, 1).matches("[0-9]+") || userInput.substring(2, 3).matches("[0-9]+"))) {
             System.out.println("You should enter numbers!");
