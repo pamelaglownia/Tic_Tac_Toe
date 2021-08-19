@@ -2,18 +2,18 @@ package com.glownia.pamela;
 
 import java.util.Random;
 
-public class Computer {
+class Computer {
     private char name;
 
-    public Computer(char name) {
+    Computer(char name) {
         this.name = name;
     }
 
-    public char getName() {
+    char getName() {
         return name;
     }
 
-    public void setName(char name) {
+    void setName(char name) {
         this.name = name;
     }
 

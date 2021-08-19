@@ -1,18 +1,20 @@
 package com.glownia.pamela;
 
-public class Printer {
+class Printer {
     GameBoard gameBoard = new GameBoard();
 
     void printWelcomeMessage() {
         StringBuilder builder = new StringBuilder();
         builder.append("Hello! Welcome to Tic-Tac-Toe game \t(author: Pam, version 1.0)\n");
-        builder.append("We have few options for you:\n");
+        builder.append("I have few options for you:\n");
         builder.append("- \"start\" game with other \"user\",\n");
-        builder.append("- \"start\" game with computer (\"easy\" level),\n");
-        builder.append("- \"start\" game with computer (\"medium\" level),\n");
+        builder.append("- \"start\" game with computer (\"easy\" or \"medium\" level),\n");
+        builder.append("- \"start\" watching game between two computers (\"easy\" or \"medium\" level),\n");
         builder.append("- \"exit\" game.\n");
-        builder.append("Choose one from options above. To start the game type three parameters or type exit to end the game.\n");
-        builder.append("(Explanation: to start with another user type: \"start user user\" and to start with computer on easy level type: \"start user easy)\" or on the medium level: \"start user medium)\"\n");
+        builder.append("Choose one from the options above. To start the game type three parameters or type exit to end the game.\n");
+        builder.append("(Explanation:\n*to start with another user type: \"start user user\",\n");
+        builder.append("*to start with computer on easy level type: \"start user easy\" or on the medium level: \"start user medium\",\n");
+        builder.append("*to watch game between two computers type: \"start easy easy\" or \"start medium medium\"\n");
         builder.append("Good luck!\n");
         System.out.println(builder);
     }

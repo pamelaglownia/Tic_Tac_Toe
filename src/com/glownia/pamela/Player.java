@@ -1,14 +1,14 @@
 package com.glownia.pamela;
 
-public class Player {
+class Player {
 
     private char name;
 
-    public char getName() {
+    char getName() {
         return name;
     }
 
-    public void setName(char name) {
+    void setName(char name) {
         this.name = name;
     }
 

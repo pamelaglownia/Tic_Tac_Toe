@@ -1,10 +1,10 @@
 package com.glownia.pamela;
 
-public class GameBoard {
-    Input input = new Input();
-    char[][] gameBoard;
+class GameBoard {
+    private Input input = new Input();
+    private char[][] gameBoard;
 
-    public GameBoard() {
+    GameBoard() {
         this.gameBoard = new char[3][3];
     }
 

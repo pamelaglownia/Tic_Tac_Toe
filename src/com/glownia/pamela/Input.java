@@ -2,7 +2,7 @@ package com.glownia.pamela;
 
 import java.util.Scanner;
 
-public class Input {
+class Input {
     Scanner scan = new Scanner(System.in);
 
     String[] inputCommand() {
