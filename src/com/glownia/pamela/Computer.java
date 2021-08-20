@@ -41,6 +41,7 @@ class Computer {
         //set temporary name
         int bestI = 0;
         int bestJ = 0;
+        boolean isBest = false;
         int emptyCells = gameBoard.countEmptyCells();
         if (getName() == 'X') {
             setName('O');
@@ -54,8 +55,8 @@ class Computer {
                     if (emptyCells >= 8 || isWinner(currentGameBoard)) {
                         bestI = i;
                         bestJ = j;
+                        isBest = true;
                     }
-
                     currentGameBoard[i][j] = ' ';
                 }
             }
@@ -67,12 +68,12 @@ class Computer {
         } else {
             setName('X');
         }
-        if (currentGameBoard[bestI][bestJ] == ' ') {
+        if (currentGameBoard[bestI][bestJ] == ' ' && isBest) {
             currentGameBoard[bestI][bestJ] = Character.toUpperCase(getName());
+            return currentGameBoard[bestI][bestJ];
         } else {
-            easyMove(currentGameBoard, gameBoard);
+            return easyMove(currentGameBoard, gameBoard);
         }
-        return currentGameBoard[bestI][bestJ];
     }
 
     boolean isWinner(char[][] currentGameBoard) {
