@@ -30,8 +30,10 @@ class GameBoard {
                     userDecision = 3;
 
                 }
-            } else if (setOfUserChoice[1].equalsIgnoreCase(MenuOption.EASY.name()) && setOfUserChoice[2].equalsIgnoreCase(MenuOption.EASY.name())) {
-                userDecision = 4;
+            } else if (setOfUserChoice[1].equalsIgnoreCase(MenuOption.EASY.name()) || setOfUserChoice[1].equalsIgnoreCase(MenuOption.MEDIUM.name())) {
+                if (setOfUserChoice[2].equalsIgnoreCase(MenuOption.EASY.name()) || setOfUserChoice[2].equalsIgnoreCase(MenuOption.MEDIUM.name())) {
+                    userDecision = 4;
+                }
             }
         }
         return userDecision;
