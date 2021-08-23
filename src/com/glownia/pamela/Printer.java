@@ -32,7 +32,7 @@ class Printer {
         System.out.println("---------");
     }
 
-    void printGame() {
+    void printGame() throws InterruptedException {
         printWelcomeMessage();
         int userDecision = gameBoard.chooseGameOption();
         switch (userDecision) {
@@ -127,7 +127,7 @@ class Printer {
         printWinner(playerX, computerPlayer, currentGameBoard);
     }
 
-    void printGameBetweenTwoComputers() {
+    void printGameBetweenTwoComputers() throws InterruptedException {
         char turn = '_';
         char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
         int emptyCells = gameBoard.countEmptyCells();
@@ -136,13 +136,15 @@ class Printer {
         while (emptyCells > 0) {
             printGameBoard(currentGameBoard);
             if (turn == 'X') {
-                System.out.println("Second computer is making move level \"easy\"");
+                Thread.sleep(1000);
+                System.out.println("Second computer is making move");
                 turn = secondComputer.easyMove(currentGameBoard, gameBoard);
                 if (secondComputer.isWinner(currentGameBoard)) {
                     break;
                 }
             } else {
-                System.out.println("First computer is making move level \"easy\"");
+                Thread.sleep(1000);
+                System.out.println("First computer is making move");
                 turn = firstComputer.easyMove(currentGameBoard, gameBoard);
                 if (firstComputer.isWinner(currentGameBoard)) {
                     break;
