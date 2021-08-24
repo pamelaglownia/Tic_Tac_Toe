@@ -18,25 +18,8 @@ class GameBoard {
     }
 
     int chooseGameOption() {
-        int userDecision = 0;
         String[] setOfUserChoice = input.inputCommand();
-        if (setOfUserChoice[0].equalsIgnoreCase(MenuOption.START.name())) {
-            if (setOfUserChoice[1].equalsIgnoreCase(MenuOption.USER.name())) {
-                if (setOfUserChoice[2].equalsIgnoreCase(MenuOption.USER.name())) {
-                    userDecision = 1;
-                } else if (setOfUserChoice[2].equalsIgnoreCase(MenuOption.EASY.name())) {
-                    userDecision = 2;
-                } else {
-                    userDecision = 3;
-
-                }
-            } else if (setOfUserChoice[1].equalsIgnoreCase(MenuOption.EASY.name()) || setOfUserChoice[1].equalsIgnoreCase(MenuOption.MEDIUM.name())) {
-                if (setOfUserChoice[2].equalsIgnoreCase(MenuOption.EASY.name()) || setOfUserChoice[2].equalsIgnoreCase(MenuOption.MEDIUM.name())) {
-                    userDecision = 4;
-                }
-            }
-        }
-        return userDecision;
+        return MenuOption.chooseOption(setOfUserChoice);
     }
 
     int[] takeCoordinates() {

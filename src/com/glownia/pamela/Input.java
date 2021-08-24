@@ -18,7 +18,7 @@ class Input {
             setOfUserChoice = inputCommand();
         } else {
             for (String userOption : setOfUserChoice) {
-                if (MenuOption.equals(userOption) == null) {
+                if (!(MenuOption.isValid(userOption))) {
                     System.out.println("Bad parameters!");
                     setOfUserChoice = inputCommand();
                     break;
