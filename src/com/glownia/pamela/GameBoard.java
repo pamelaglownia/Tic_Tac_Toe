@@ -1,7 +1,6 @@
 package com.glownia.pamela;
 
 class GameBoard {
-    private Input input = new Input();
     private char[][] gameBoard;
 
     GameBoard() {
@@ -15,24 +14,6 @@ class GameBoard {
             }
         }
         return gameBoard;
-    }
-
-    int chooseGameOption() {
-        String[] setOfUserChoice = input.inputCommand();
-        return MenuOption.chooseOption(setOfUserChoice);
-    }
-
-    int[] takeCoordinates() {
-        int[] coordinates = input.inputCoordinates();
-        int i = coordinates[0];
-        int j = coordinates[1];
-        while (!(isEmptyCell(i, j))) {
-            System.out.println("This cell is occupied! Choose another one!");
-            coordinates = input.inputCoordinates();
-            i = coordinates[0];
-            j = coordinates[1];
-        }
-        return coordinates;
     }
 
     boolean isEmptyCell(int i, int j) {
