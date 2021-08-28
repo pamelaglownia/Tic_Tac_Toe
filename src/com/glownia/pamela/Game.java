@@ -2,21 +2,21 @@ package com.glownia.pamela;
 
 import java.util.Random;
 
-public class Game {
+class Game {
     private final GameBoard gameBoard = new GameBoard();
     private final Printer printer = new Printer();
     private final Input input = new Input();
 
-    int chooseGameOption() {
+    private int chooseGameOption() {
         String[] setOfUserChoice = input.inputCommand();
         return MenuOption.chooseOption(setOfUserChoice);
     }
 
-    char setPlayerName() {
+    private char setPlayerName() {
         return input.chooseCharacterToPlay();
     }
 
-    void setBothUsersNames(Player firstPlayer, Player secondPlayer) {
+    private void setBothUsersNames(Player firstPlayer, Player secondPlayer) {
         firstPlayer.setName(setPlayerName());
         if (firstPlayer.getName() == 'X') {
             secondPlayer.setName('O');
@@ -25,7 +25,7 @@ public class Game {
         }
     }
 
-    int[] takeCoordinates() {
+    private int[] takeCoordinates() {
         int[] coordinates = input.inputCoordinates();
         int i = coordinates[0];
         int j = coordinates[1];
@@ -38,7 +38,7 @@ public class Game {
         return coordinates;
     }
 
-    char playerMove(char[][] currentGameBoard, char name) {
+    private char playerMove(char[][] currentGameBoard, char name) {
         int[] correctCoordinates = takeCoordinates();
         int i = correctCoordinates[0] - 1;
         int j = correctCoordinates[1] - 1;
@@ -46,7 +46,7 @@ public class Game {
         return currentGameBoard[i][j];
     }
 
-    int[] takeRandomCoordinatesForComputerPlayer(GameBoard gameBoard) {
+    private int[] takeRandomCoordinatesForComputerPlayer(GameBoard gameBoard) {
         int[] coordinates = new int[2];
         Random random = new Random();
         coordinates[0] = random.nextInt(3) + 1;
@@ -58,7 +58,7 @@ public class Game {
         return coordinates;
     }
 
-    char easyComputerMove(char[][] currentGameBoard, char name) {
+    private char easyComputerMove(char[][] currentGameBoard, char name) {
         int[] correctCoordinates = takeRandomCoordinatesForComputerPlayer(gameBoard);
         int i = correctCoordinates[0] - 1;
         int j = correctCoordinates[1] - 1;
@@ -66,8 +66,7 @@ public class Game {
         return currentGameBoard[i][j];
     }
 
-    char mediumComputerMove(char[][] currentGameBoard, char playerName, char computerName) {
-        //set temporary name
+    private char mediumComputerMove(char[][] currentGameBoard, char playerName, char computerName) {
         int bestI = 0;
         int bestJ = 0;
         boolean isBest = false;
@@ -120,7 +119,7 @@ public class Game {
         }
     }
 
-    void playGameBetweenTwoUsers() {
+    private void playGameBetweenTwoUsers() {
         Player firstPlayer = new Player();
         Player secondPlayer = new Player();
         setBothUsersNames(firstPlayer, secondPlayer);
@@ -146,7 +145,7 @@ public class Game {
         checkWinner(turn, emptyCells, currentGameBoard);
     }
 
-    void playGameWithComputer(MenuOption computerLevel) {
+    private void playGameWithComputer(MenuOption computerLevel) {
         char turn = '_';
         char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
         int emptyCells = gameBoard.countEmptyCells();
@@ -178,7 +177,7 @@ public class Game {
         checkWinner(turn, emptyCells, currentGameBoard);
     }
 
-    void playGameBetweenTwoComputers() throws InterruptedException {
+    private void playGameBetweenTwoComputers() throws InterruptedException {
         char turn = '_';
         char[][] currentGameBoard = gameBoard.createEmptyGameBoard();
         int emptyCells = gameBoard.countEmptyCells();
@@ -207,7 +206,7 @@ public class Game {
         checkWinner(turn, emptyCells, currentGameBoard);
     }
 
-    boolean isWinner(char[][] gameBoard, char name) {
+    private boolean isWinner(char[][] gameBoard, char name) {
         //columns
         for (int i = 0; i < gameBoard.length; i++) {
             if (!(gameBoard[i][0] == name)) {
@@ -282,7 +281,7 @@ public class Game {
         return false;
     }
 
-    void checkWinner(char name, int emptyCells, char[][] currentGameBoard) {
+    private void checkWinner(char name, int emptyCells, char[][] currentGameBoard) {
         if (emptyCells == 0 && !(isWinner(currentGameBoard, name))) {
             printer.printDraw();
         } else {

@@ -1,7 +1,7 @@
 package com.glownia.pamela;
 
 class GameBoard {
-    private char[][] gameBoard;
+    private final char[][] gameBoard;
 
     GameBoard() {
         this.gameBoard = new char[3][3];

@@ -3,7 +3,7 @@ package com.glownia.pamela;
 import java.util.Scanner;
 
 class Input {
-    private Scanner scan = new Scanner(System.in);
+    private final Scanner scan = new Scanner(System.in);
 
     String[] inputCommand() {
         System.out.print("Input command separate with space: ");

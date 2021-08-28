@@ -1,7 +1,7 @@
 package com.glownia.pamela;
 
 class Computer {
-    private char name;
+    private final char name;
 
     Computer(char name) {
         this.name = name;
